@@ -1,0 +1,97 @@
+#include <SoftwareSerial.h>
+#include <AFMotor.h>
+AF_DCMotor motor_LB(1);     // 모터 1 객체         
+AF_DCMotor motor_RB(2);     // 모터 2 객체 
+AF_DCMotor motor_RF(3);     // 모터 3 객체
+AF_DCMotor motor_LF(4);     // 모터 4 객체
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  motor_LB.setSpeed(90);    // 모터 1 속도 설정          
+  motor_LB.run(RELEASE);     // 모터 1 돌리지 않는 상태
+  motor_RB.setSpeed(90);    // 모터 2 속도 설정          
+  motor_RB.run(RELEASE);     // 모터 2 돌리지 않는 상태
+  motor_RF.setSpeed(90);    // 모터 3 속도 설정          
+  motor_RF.run(RELEASE);     // 모터 3 돌리지 않는 상태
+  motor_LF.setSpeed(90);    // 모터 4 속도 설정          
+  motor_LF.run(RELEASE);     // 모터 4 돌리지 않는 상태
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+  int a = Serial.read();
+ 
+  //정지
+  if(a == 53) {
+    motor_LB.run(RELEASE);
+    motor_RB.run(RELEASE);
+    motor_RF.run(RELEASE);
+    motor_LF.run(RELEASE);
+  }
+  //직진)
+  /*
+  else if(a == 49) {
+    Serial.println("go");
+    
+    motor_LB.setSpeed(80);
+    motor_RB.setSpeed(80);
+    motor_RF.setSpeed(80);
+    motor_LF.setSpeed(80);
+
+    motor_LB.run(FORWARD);
+    motor_RB.run(FORWARD);
+    motor_RF.run(FORWARD);
+    motor_LF.run(FORWARD);
+    
+   
+  }
+  */
+
+
+  //우회전 (1번, 4번)
+
+  else if(a == 50) {
+    Serial.println("Right");
+    motor_LB.run(RELEASE);
+    motor_RB.run(RELEASE);
+    motor_RF.run(RELEASE);
+    motor_LF.run(RELEASE);
+    
+    motor_LB.setSpeed(100);
+    motor_LF.setSpeed(100);
+    motor_RB.setSpeed(70);
+    motor_RF.setSpeed(70);
+    
+    motor_LB.run(FORWARD);
+    //motor_RB.run(FORWARD);
+    //motor_RF.run(FORWARD);
+    motor_LF.run(FORWARD);
+  }
+
+  else if(a == 51) {
+    Serial.println("Left");
+    motor_LB.run(RELEASE);
+    motor_RB.run(RELEASE);
+    motor_RF.run(RELEASE);
+    motor_LF.run(RELEASE);
+    
+    motor_RB.setSpeed(100);
+    motor_RF.setSpeed(100);
+    motor_LB.setSpeed(70);
+    motor_LF.setSpeed(70);
+    
+    //motor_LB.run(FORWARD);
+    motor_RB.run(FORWARD);
+    motor_RF.run(FORWARD);
+    //motor_LF.run(FORWARD);
+    
+  }
+  
+//delay(500);
+Serial.println(a);
+
+}
