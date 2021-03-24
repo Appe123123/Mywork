@@ -2,7 +2,12 @@
 //JS에서는 const를 주로 사용하는것을 권장 !
 
 
-const title = document.querySelector(".title");
-title.style.color = "red";
+const title = document.querySelector("#title");
+title.style.color = "blue";
 title.innerHTML = "HI!";
-document.title = "i own you now";
+
+function handleClick() {
+    title.style.color = "red";
+}
+
+window.addEventListener("click", handleClick);
