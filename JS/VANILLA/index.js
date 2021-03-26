@@ -3,11 +3,19 @@
 
 
 const title = document.querySelector("#title");
-title.style.color = "blue";
-title.innerHTML = "HI!";
+//title.style.color = "blue";
+//title.innerHTML = "HI!";
+
+const CLICKED_CLASS = "clicked";
 
 function handleClick() {
-    title.style.color = "red";
+    const hasClass = title.classList.contains(CLICKED_CLASS)
+    if(!hasClass) {
+        title.classList.add(CLICKED_CLASS);
+    }
+    else {
+        title.classList.remove(CLICKED_CLASS);
+    }
 }
 
 window.addEventListener("click", handleClick);
